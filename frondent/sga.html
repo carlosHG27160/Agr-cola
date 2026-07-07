@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SGA · Cuaderno de Campo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sga.css">
+</head>
+<body>
+<div id="toast"></div>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">Campo <span>SGA</span></div>
+      <div class="brand-sub">Cuaderno digital · Valle de Ica</div>
+    </div>
+    <nav id="nav"></nav>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <div>
+        <div class="eyebrow" id="crumb">Panel</div>
+        <h1 id="pageTitle">Resumen de campaña</h1>
+        <div class="desc" id="pageDesc">Estado general de parcelas, cosechas, inventario y ventas.</div>
+      </div>
+      <div id="topbarActions"></div>
+    </div>
+
+    <div id="viewRoot"></div>
+  </main>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">Nuevo registro</h3>
+      <button onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="alert" id="modalAlert"></div>
+      <div id="modalFields"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn" id="modalSave">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<script src="sga.js"></script>
+</body>
+</html>
