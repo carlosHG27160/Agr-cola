@@ -17,9 +17,6 @@ const config = {
   },
 };
 
-// Instancia con nombre (ej. DESKTOP-AEVFHR7\SEKHARSQL): se usa options.instanceName
-// y NO se especifica puerto fijo (el driver lo resuelve vía SQL Browser, UDP 1434).
-// Instancia por defecto o IP directa: se usa DB_PORT (por defecto 1433).
 if (process.env.DB_INSTANCE) {
   config.options.instanceName = process.env.DB_INSTANCE;
 } else {
@@ -33,7 +30,7 @@ function getPool() {
     poolPromise = new sql.ConnectionPool(config)
       .connect()
       .catch((err) => {
-        poolPromise = null; // permite reintentar en la próxima petición
+        poolPromise = null;
         throw err;
       });
   }

@@ -1,192 +1,26 @@
-/* ============================================================================
-   DATOS (equivalentes a los INSERT del script BD_AGRICOLA)
-   ============================================================================ */
-let seq = { usuarios:11, agricultores:11, parcelas:11, cultivos:11, siembras:11, insumos:11,
-  proveedores:11, compras:11, detalleCompra:11, trabajadores:11, actividades:11, cosechas:8,
-  clientes:11, ventas:11, detalleVenta:11 };
+let seq = { usuarios:1, agricultores:1, parcelas:1, cultivos:1, siembras:1, insumos:1,
+  proveedores:1, compras:1, detalleCompra:1, trabajadores:1, actividades:1, cosechas:1,
+  clientes:1, ventas:1, detalleVenta:1 };
 
 const db = {
-  usuarios:[
-    {id:1,usuario:'jperez',rol:'Administrador',activo:1},
-    {id:2,usuario:'mrodrig',rol:'Operador',activo:1},
-    {id:3,usuario:'lcastro',rol:'Ventas',activo:1},
-    {id:4,usuario:'rvargas',rol:'Operador',activo:1},
-    {id:5,usuario:'acortez',rol:'Consulta',activo:1},
-    {id:6,usuario:'ssanchez',rol:'Ventas',activo:1},
-    {id:7,usuario:'dflores',rol:'Operador',activo:1},
-    {id:8,usuario:'hmedina',rol:'Administrador',activo:1},
-    {id:9,usuario:'pcastillo',rol:'Operador',activo:0},
-    {id:10,usuario:'jguerra',rol:'Consulta',activo:1},
-  ],
-  agricultores:[
-    {id:1,nombres:'Juan',apellidos:'Perez Lima',dni:'10101010',telefono:'987654321',direccion:'Av. Los Andes 123'},
-    {id:2,nombres:'Maria',apellidos:'Gomez Torres',dni:'10101011',telefono:'987654322',direccion:'Jr. Sucre 456'},
-    {id:3,nombres:'Carlos',apellidos:'Ramirez Diaz',dni:'10101012',telefono:'987654323',direccion:'Calle Real 789'},
-    {id:4,nombres:'Ana',apellidos:'Flores Vega',dni:'10101013',telefono:'987654324',direccion:'Av. Grau 234'},
-    {id:5,nombres:'Pedro',apellidos:'Suarez Leon',dni:'10101014',telefono:'987654325',direccion:'Jr. Libertad 111'},
-    {id:6,nombres:'Rosa',apellidos:'Chavez Mora',dni:'10101015',telefono:'987654326',direccion:'Av. Sol 222'},
-    {id:7,nombres:'Luis',apellidos:'Herrera Paz',dni:'10101016',telefono:'987654327',direccion:'Calle Union 333'},
-    {id:8,nombres:'Elena',apellidos:'Quispe Rios',dni:'10101017',telefono:'987654328',direccion:'Jr. Amazonas 444'},
-    {id:9,nombres:'Miguel',apellidos:'Torres Nina',dni:'10101018',telefono:'987654329',direccion:'Av. Peru 555'},
-    {id:10,nombres:'Sofia',apellidos:'Mamani Cruz',dni:'10101019',telefono:'987654330',direccion:'Calle Lima 666'},
-  ],
-  parcelas:[
-    {id:1,idAgricultor:1,nombre:'Parcela El Sol',ubicacion:'Ica - Valle Verde',area:3.50,suelo:'Arenoso'},
-    {id:2,idAgricultor:2,nombre:'Parcela La Esperanza',ubicacion:'Ica - San Jose',area:2.00,suelo:'Franco'},
-    {id:3,idAgricultor:3,nombre:'Parcela Los Olivos',ubicacion:'Ica - Ocucaje',area:5.00,suelo:'Arcilloso'},
-    {id:4,idAgricultor:4,nombre:'Parcela El Milagro',ubicacion:'Ica - Pueblo Nuevo',area:1.80,suelo:'Franco Arenoso'},
-    {id:5,idAgricultor:5,nombre:'Parcela Santa Rosa',ubicacion:'Ica - Subtanjalla',area:4.20,suelo:'Franco'},
-    {id:6,idAgricultor:6,nombre:'Parcela El Progreso',ubicacion:'Ica - La Tinguina',area:2.75,suelo:'Arenoso'},
-    {id:7,idAgricultor:7,nombre:'Parcela Buena Vista',ubicacion:'Ica - Parcona',area:3.10,suelo:'Franco Arcilloso'},
-    {id:8,idAgricultor:8,nombre:'Parcela El Paraiso',ubicacion:'Ica - Salas',area:2.40,suelo:'Franco'},
-    {id:9,idAgricultor:9,nombre:'Parcela San Martin',ubicacion:'Ica - Los Molinos',area:6.00,suelo:'Arenoso'},
-    {id:10,idAgricultor:10,nombre:'Parcela La Union',ubicacion:'Ica - Guadalupe',area:1.50,suelo:'Franco Arenoso'},
-  ],
-  cultivos:[
-    {id:1,nombre:'Algodon',tipo:'Industrial',ciclo:180,precio:3.50},
-    {id:2,nombre:'Esparrago',tipo:'Hortaliza',ciclo:365,precio:5.20},
-    {id:3,nombre:'Uva',tipo:'Fruta',ciclo:210,precio:4.80},
-    {id:4,nombre:'Maiz',tipo:'Cereal',ciclo:120,precio:1.20},
-    {id:5,nombre:'Papa',tipo:'Tuberculo',ciclo:150,precio:1.80},
-    {id:6,nombre:'Tomate',tipo:'Hortaliza',ciclo:90,precio:2.10},
-    {id:7,nombre:'Palta',tipo:'Fruta',ciclo:300,precio:6.00},
-    {id:8,nombre:'Cebolla',tipo:'Hortaliza',ciclo:120,precio:1.50},
-    {id:9,nombre:'Camote',tipo:'Tuberculo',ciclo:130,precio:1.30},
-    {id:10,nombre:'Frijol',tipo:'Legumbre',ciclo:100,precio:3.00},
-  ],
-  siembras:[
-    {id:1,idParcela:1,idCultivo:1,fecha:'2025-08-01',semillaKg:120,campania:'2025-II',estado:'Cosechado'},
-    {id:2,idParcela:2,idCultivo:2,fecha:'2025-07-15',semillaKg:80,campania:'2025-II',estado:'Cosechado'},
-    {id:3,idParcela:3,idCultivo:3,fecha:'2025-06-10',semillaKg:60,campania:'2025-I',estado:'Cosechado'},
-    {id:4,idParcela:4,idCultivo:4,fecha:'2025-09-01',semillaKg:45,campania:'2025-II',estado:'Cosechado'},
-    {id:5,idParcela:5,idCultivo:5,fecha:'2025-09-10',semillaKg:300,campania:'2025-II',estado:'Cosechado'},
-    {id:6,idParcela:6,idCultivo:6,fecha:'2025-10-01',semillaKg:20,campania:'2025-II',estado:'Cosechado'},
-    {id:7,idParcela:7,idCultivo:7,fecha:'2025-05-01',semillaKg:40,campania:'2025-I',estado:'Cosechado'},
-    {id:8,idParcela:8,idCultivo:8,fecha:'2025-10-15',semillaKg:30,campania:'2025-II',estado:'En Crecimiento'},
-    {id:9,idParcela:9,idCultivo:9,fecha:'2025-11-01',semillaKg:250,campania:'2025-II',estado:'En Crecimiento'},
-    {id:10,idParcela:10,idCultivo:10,fecha:'2025-11-05',semillaKg:35,campania:'2025-II',estado:'Sembrado'},
-  ],
-  insumos:[
-    {id:1,nombre:'Urea',tipo:'Fertilizante',unidad:'kg',stock:500,stockMin:100,precio:2.50},
-    {id:2,nombre:'Fosfato Diamonico',tipo:'Fertilizante',unidad:'kg',stock:300,stockMin:80,precio:3.20},
-    {id:3,nombre:'Sulfato de Potasio',tipo:'Fertilizante',unidad:'kg',stock:250,stockMin:50,precio:4.10},
-    {id:4,nombre:'Insecticida Cipermetrina',tipo:'Pesticida',unidad:'lt',stock:60,stockMin:15,precio:25.00},
-    {id:5,nombre:'Fungicida Mancozeb',tipo:'Pesticida',unidad:'kg',stock:40,stockMin:10,precio:18.50},
-    {id:6,nombre:'Semilla Certificada Maiz',tipo:'Semilla',unidad:'kg',stock:200,stockMin:50,precio:6.00},
-    {id:7,nombre:'Semilla Papa',tipo:'Semilla',unidad:'kg',stock:400,stockMin:100,precio:3.80},
-    {id:8,nombre:'Pala',tipo:'Herramienta',unidad:'unidad',stock:25,stockMin:5,precio:15.00},
-    {id:9,nombre:'Manguera Riego',tipo:'Herramienta',unidad:'metro',stock:150,stockMin:30,precio:2.20},
-    {id:10,nombre:'Herbicida Glifosato',tipo:'Pesticida',unidad:'lt',stock:50,stockMin:10,precio:22.00},
-  ],
-  proveedores:[
-    {id:1,razonSocial:'Agroquimicos del Sur SAC',ruc:'20451234561',telefono:'056123456',direccion:'Av. Industrial 100, Ica',email:'ventas@agrosur.com'},
-    {id:2,razonSocial:'Semillas Peru EIRL',ruc:'20451234562',telefono:'056123457',direccion:'Jr. Comercio 200, Ica',email:'contacto@semillasperu.com'},
-    {id:3,razonSocial:'Fertilizantes Nacionales SA',ruc:'20451234563',telefono:'056123458',direccion:'Av. Los Fundos 300, Ica',email:'info@fertinacional.com'},
-    {id:4,razonSocial:'AgroInsumos Ica SAC',ruc:'20451234564',telefono:'056123459',direccion:'Calle Industrial 400, Ica',email:'contacto@agroinsumosica.com'},
-    {id:5,razonSocial:'Distribuidora El Campo',ruc:'20451234565',telefono:'056123460',direccion:'Av. Panamericana 500, Ica',email:'ventas@elcampo.com'},
-    {id:6,razonSocial:'Quimica Agricola SRL',ruc:'20451234566',telefono:'056123461',direccion:'Jr. Ayacucho 600, Ica',email:'contacto@quimicagricola.com'},
-    {id:7,razonSocial:'Ferreteria Agro Ica',ruc:'20451234567',telefono:'056123462',direccion:'Av. Cutervo 700, Ica',email:'ventas@ferreagro.com'},
-    {id:8,razonSocial:'Semillas y Mas SAC',ruc:'20451234568',telefono:'056123463',direccion:'Calle Piura 800, Ica',email:'info@semillasymas.com'},
-    {id:9,razonSocial:'Agroquimica Peruana SA',ruc:'20451234569',telefono:'056123464',direccion:'Av. Tacna 900, Ica',email:'contacto@agroquimicaperuana.com'},
-    {id:10,razonSocial:'Insumos del Valle EIRL',ruc:'20451234570',telefono:'056123465',direccion:'Jr. Cusco 1000, Ica',email:'ventas@insumosdelvalle.com'},
-  ],
-  compras:[
-    {id:1,idProveedor:1,fecha:'2025-07-01',factura:'F001-0001',estado:'Pagada',monto:0},
-    {id:2,idProveedor:2,fecha:'2025-07-05',factura:'F001-0002',estado:'Pagada',monto:0},
-    {id:3,idProveedor:3,fecha:'2025-07-10',factura:'F001-0003',estado:'Pagada',monto:0},
-    {id:4,idProveedor:4,fecha:'2025-08-01',factura:'F001-0004',estado:'Pagada',monto:0},
-    {id:5,idProveedor:5,fecha:'2025-08-10',factura:'F001-0005',estado:'Registrada',monto:0},
-    {id:6,idProveedor:6,fecha:'2025-08-15',factura:'F001-0006',estado:'Pagada',monto:0},
-    {id:7,idProveedor:7,fecha:'2025-09-01',factura:'F001-0007',estado:'Registrada',monto:0},
-    {id:8,idProveedor:8,fecha:'2025-09-10',factura:'F001-0008',estado:'Pagada',monto:0},
-    {id:9,idProveedor:9,fecha:'2025-09-20',factura:'F001-0009',estado:'Registrada',monto:0},
-    {id:10,idProveedor:10,fecha:'2025-10-01',factura:'F001-0010',estado:'Pagada',monto:0},
-  ],
-  detalleCompra:[
-    {id:1,idCompra:1,idInsumo:1,cantidad:100,precio:2.50},
-    {id:2,idCompra:2,idInsumo:6,cantidad:50,precio:6.00},
-    {id:3,idCompra:3,idInsumo:2,cantidad:80,precio:3.20},
-    {id:4,idCompra:4,idInsumo:4,cantidad:20,precio:25.00},
-    {id:5,idCompra:5,idInsumo:7,cantidad:100,precio:3.80},
-    {id:6,idCompra:6,idInsumo:3,cantidad:60,precio:4.10},
-    {id:7,idCompra:7,idInsumo:5,cantidad:15,precio:18.50},
-    {id:8,idCompra:8,idInsumo:8,cantidad:10,precio:15.00},
-    {id:9,idCompra:9,idInsumo:9,cantidad:60,precio:2.20},
-    {id:10,idCompra:10,idInsumo:10,cantidad:20,precio:22.00},
-  ],
-  trabajadores:[
-    {id:1,nombres:'Jose',apellidos:'Aguilar Rios',dni:'20101010',telefono:'911111111',cargo:'Jornalero',salario:45.00,fechaContrato:'2024-01-10'},
-    {id:2,nombres:'Marco',apellidos:'Bustamante Diaz',dni:'20101011',telefono:'911111112',cargo:'Capataz',salario:60.00,fechaContrato:'2024-02-15'},
-    {id:3,nombres:'Teresa',apellidos:'Campos Vega',dni:'20101012',telefono:'911111113',cargo:'Jornalero',salario:45.00,fechaContrato:'2024-03-01'},
-    {id:4,nombres:'Raul',apellidos:'Delgado Nina',dni:'20101013',telefono:'911111114',cargo:'Regador',salario:50.00,fechaContrato:'2024-03-20'},
-    {id:5,nombres:'Carmen',apellidos:'Espinoza Luna',dni:'20101014',telefono:'911111115',cargo:'Jornalero',salario:45.00,fechaContrato:'2024-04-05'},
-    {id:6,nombres:'Victor',apellidos:'Fernandez Cruz',dni:'20101015',telefono:'911111116',cargo:'Fumigador',salario:55.00,fechaContrato:'2024-04-18'},
-    {id:7,nombres:'Gladys',apellidos:'Garcia Mora',dni:'20101016',telefono:'911111117',cargo:'Jornalero',salario:45.00,fechaContrato:'2024-05-01'},
-    {id:8,nombres:'Oscar',apellidos:'Huaman Paz',dni:'20101017',telefono:'911111118',cargo:'Capataz',salario:60.00,fechaContrato:'2024-05-15'},
-    {id:9,nombres:'Rocio',apellidos:'Ibarra Leon',dni:'20101018',telefono:'911111119',cargo:'Jornalero',salario:45.00,fechaContrato:'2024-06-01'},
-    {id:10,nombres:'Fredy',apellidos:'Jimenez Soto',dni:'20101019',telefono:'911111120',cargo:'Regador',salario:50.00,fechaContrato:'2024-06-20'},
-  ],
-  actividades:[
-    {id:1,idSiembra:1,idTrabajador:1,tipo:'Preparacion Terreno',fecha:'2025-07-28',horas:8.0},
-    {id:2,idSiembra:1,idTrabajador:2,tipo:'Siembra',fecha:'2025-08-01',horas:6.0},
-    {id:3,idSiembra:2,idTrabajador:3,tipo:'Riego',fecha:'2025-07-20',horas:4.0},
-    {id:4,idSiembra:3,idTrabajador:4,tipo:'Fertilizacion',fecha:'2025-06-25',horas:5.0},
-    {id:5,idSiembra:4,idTrabajador:5,tipo:'Control Plagas',fecha:'2025-09-15',horas:6.5},
-    {id:6,idSiembra:5,idTrabajador:6,tipo:'Deshierbe',fecha:'2025-09-25',horas:7.0},
-    {id:7,idSiembra:6,idTrabajador:7,tipo:'Cosecha',fecha:'2025-12-20',horas:8.0},
-    {id:8,idSiembra:7,idTrabajador:8,tipo:'Riego',fecha:'2025-05-10',horas:3.0},
-    {id:9,idSiembra:8,idTrabajador:9,tipo:'Fertilizacion',fecha:'2025-10-20',horas:5.5},
-    {id:10,idSiembra:9,idTrabajador:10,tipo:'Siembra',fecha:'2025-11-01',horas:6.0},
-  ],
-  cosechas:[
-    {id:1,idSiembra:1,fecha:'2026-01-15',cantidadKg:4200,calidad:'Buena',perdidaKg:100,disponibleKg:0},
-    {id:2,idSiembra:2,fecha:'2026-01-20',cantidadKg:3500,calidad:'Excelente',perdidaKg:50,disponibleKg:0},
-    {id:3,idSiembra:3,fecha:'2025-12-30',cantidadKg:6000,calidad:'Buena',perdidaKg:200,disponibleKg:0},
-    {id:4,idSiembra:4,fecha:'2025-12-28',cantidadKg:3600,calidad:'Regular',perdidaKg:150,disponibleKg:0},
-    {id:5,idSiembra:5,fecha:'2026-01-05',cantidadKg:9000,calidad:'Excelente',perdidaKg:100,disponibleKg:0},
-    {id:6,idSiembra:6,fecha:'2025-12-25',cantidadKg:1800,calidad:'Buena',perdidaKg:60,disponibleKg:0},
-    {id:7,idSiembra:7,fecha:'2025-02-15',cantidadKg:5000,calidad:'Excelente',perdidaKg:80,disponibleKg:0},
-  ],
-  clientes:[
-    {id:1,nombre:'Mercado Mayorista Ica SAC',tipo:'Empresa',doc:'20551234561',telefono:'056900001',direccion:'Av. Grau 100, Ica',email:'compras@mercadoica.com'},
-    {id:2,nombre:'Exportadora AgroPeru SA',tipo:'Empresa',doc:'20551234562',telefono:'056900002',direccion:'Av. Industrial 200, Ica',email:'compras@agroperu.com'},
-    {id:3,nombre:'Juan Delgado Rios',tipo:'Natural',doc:'30101010',telefono:'922000001',direccion:'Calle Real 12, Ica',email:'jdelgado@mail.com'},
-    {id:4,nombre:'Supermercados Andinos SAC',tipo:'Empresa',doc:'20551234563',telefono:'056900003',direccion:'Av. Los Andes 300, Ica',email:'logistica@andinos.com'},
-    {id:5,nombre:'Rosa Huaman Silva',tipo:'Natural',doc:'30101011',telefono:'922000002',direccion:'Jr. Piura 45, Ica',email:'rhuaman@mail.com'},
-    {id:6,nombre:'Distribuidora Frutas SAC',tipo:'Empresa',doc:'20551234564',telefono:'056900004',direccion:'Av. Peru 400, Ica',email:'ventas@distrifrutas.com'},
-    {id:7,nombre:'Carlos Ortega Vega',tipo:'Natural',doc:'30101012',telefono:'922000003',direccion:'Calle Lima 78, Ica',email:'cortega@mail.com'},
-    {id:8,nombre:'Restaurantes Unidos SA',tipo:'Empresa',doc:'20551234565',telefono:'056900005',direccion:'Av. Sol 500, Ica',email:'compras@restaurantesunidos.com'},
-    {id:9,nombre:'Ana Salas Chura',tipo:'Natural',doc:'30101013',telefono:'922000004',direccion:'Jr. Cusco 90, Ica',email:'asalas@mail.com'},
-    {id:10,nombre:'Comercial Agricola del Sur',tipo:'Empresa',doc:'20551234566',telefono:'056900006',direccion:'Av. Tacna 600, Ica',email:'contacto@comercialagricola.com'},
-  ],
-  ventas:[
-    {id:1,idCliente:1,fecha:'2026-01-18',comprobante:'B001-0001',estado:'Pagada',monto:0},
-    {id:2,idCliente:2,fecha:'2026-01-22',comprobante:'B001-0002',estado:'Pagada',monto:0},
-    {id:3,idCliente:3,fecha:'2026-01-05',comprobante:'B001-0003',estado:'Pagada',monto:0},
-    {id:4,idCliente:4,fecha:'2026-01-02',comprobante:'B001-0004',estado:'Registrada',monto:0},
-    {id:5,idCliente:5,fecha:'2026-01-10',comprobante:'B001-0005',estado:'Pagada',monto:0},
-    {id:6,idCliente:6,fecha:'2025-12-30',comprobante:'B001-0006',estado:'Pagada',monto:0},
-    {id:7,idCliente:1,fecha:'2026-01-25',comprobante:'B001-0007',estado:'Registrada',monto:0},
-    {id:8,idCliente:7,fecha:'2025-02-20',comprobante:'B001-0008',estado:'Pagada',monto:0},
-    {id:9,idCliente:8,fecha:'2026-01-08',comprobante:'B001-0009',estado:'Pagada',monto:0},
-    {id:10,idCliente:9,fecha:'2025-12-29',comprobante:'B001-0010',estado:'Registrada',monto:0},
-  ],
-  detalleVenta:[
-    {id:1,idVenta:1,idCosecha:1,cantidadKg:1500,precio:3.60},
-    {id:2,idVenta:2,idCosecha:2,cantidadKg:1200,precio:5.30},
-    {id:3,idVenta:3,idCosecha:3,cantidadKg:2000,precio:4.90},
-    {id:4,idVenta:4,idCosecha:4,cantidadKg:1000,precio:1.25},
-    {id:5,idVenta:5,idCosecha:5,cantidadKg:3000,precio:1.85},
-    {id:6,idVenta:6,idCosecha:6,cantidadKg:500,precio:2.20},
-    {id:7,idVenta:7,idCosecha:1,cantidadKg:800,precio:3.60},
-    {id:8,idVenta:8,idCosecha:7,cantidadKg:2500,precio:6.10},
-    {id:9,idVenta:9,idCosecha:3,cantidadKg:1500,precio:4.90},
-    {id:10,idVenta:10,idCosecha:5,cantidadKg:2000,precio:1.85},
-  ],
-  auditoria:[]
+  usuarios: [],
+  agricultores: [],
+  parcelas: [],
+  cultivos: [],
+  siembras: [],
+  insumos: [],
+  proveedores: [],
+  compras: [],
+  detalleCompra: [],
+  trabajadores: [],
+  actividades: [],
+  cosechas: [],
+  clientes: [],
+  ventas: [],
+  detalleVenta: [],
+  auditoria: []
 };
 
-/* -------- Recalculo inicial (equivalente a los triggers de negocio) -------- */
 function recalcCompras(){
   db.compras.forEach(c=>{
     c.monto = db.detalleCompra.filter(d=>d.idCompra===c.id).reduce((s,d)=>s+d.cantidad*d.precio,0);
@@ -202,16 +36,62 @@ function recalcVentasYDisponibilidad(){
     v.monto = db.detalleVenta.filter(d=>d.idVenta===v.id).reduce((s,d)=>s+d.cantidadKg*d.precio,0);
   });
 }
+const STORAGE_KEY = 'sga_offline_state_v1';
+
+function loadPersistedState(){
+  if (typeof window === 'undefined' || !window.localStorage) return null;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    console.warn('No se pudo leer el estado persistido:', e.message);
+    return null;
+  }
+}
+
+function savePersistedState(){
+  if (typeof window === 'undefined' || !window.localStorage) return;
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ db, seq }));
+  } catch (e) {
+    console.warn('No se pudo guardar el estado persistido:', e.message);
+  }
+}
+
+const persistedState = loadPersistedState();
+if (persistedState) {
+  if (persistedState.db) {
+    Object.keys(persistedState.db).forEach(key => {
+      if (persistedState.db[key] !== undefined) db[key] = persistedState.db[key];
+    });
+  }
+  if (persistedState.seq) {
+    seq = { ...seq, ...persistedState.seq };
+  }
+}
+
 recalcCompras();
 recalcVentasYDisponibilidad();
 
 function addAudit(tabla,op,detalle){
-  db.auditoria.unshift({id:db.auditoria.length+1, tabla, op, detalle, fecha:new Date().toLocaleString('es-PE')});
+  const local = {id: db.auditoria.length+1, tabla, op, detalle, fecha: new Date().toLocaleString('es-PE')};
+  db.auditoria.unshift(local);
+  
+  if(apiConnected){
+    (async () => {
+      try {
+        const payload = { TablaAfectada: tabla, Operacion: op, IdRegistro: null, DetalleAnterior: null, DetalleNuevo: detalle };
+        const res = await insertRow('auditoria', payload);
+        if(res && res.success && res.id){
+          local.id = Number(res.id);
+        }
+      } catch(e){
+        console.warn('No se pudo persistir auditoría en BD:', e.message);
+      }
+    })();
+  }
 }
 
-/* ============================================================================
-   CAPA DE API (Conexión con Backend SQL Server)
-   ============================================================================ */
 const API_URL = 'http://localhost:3000/api';
 let apiConnected = false;
 
@@ -295,6 +175,7 @@ async function insertRow(tableName, data){
     ventas: 'sp_InsertarVenta',
     clientes: 'sp_InsertarCliente',
     proveedores: 'sp_InsertarProveedor',
+    auditoria: 'sp_InsertarAuditoria',
   };
   
   const procName = mapping[tableName];
@@ -348,9 +229,6 @@ async function deleteRow(tableName, id){
   return result;
 }
 
-/* ============================================================================
-   UTILIDADES
-   ============================================================================ */
 const fmt = n => (Number(n)||0).toLocaleString('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2});
 const money = n => 'S/ ' + fmt(n);
 function toast(msg){
@@ -383,9 +261,6 @@ function icon(name){
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${icons[name]||''}</svg>`;
 }
 
-/* ============================================================================
-   CONFIGURACION DE MODULOS
-   ============================================================================ */
 const modules = [
   {group:'General', items:[
     {key:'dashboard', label:'Resumen', icon:'dashboard'},
@@ -417,9 +292,6 @@ const modules = [
 let currentView='dashboard';
 let editingId=null;
 
-/* ============================================================================
-   NAV
-   ============================================================================ */
 function buildNav(){
   const nav=document.getElementById('nav');
   nav.innerHTML='';
@@ -443,9 +315,6 @@ function navigate(key){
   render();
 }
 
-/* ============================================================================
-   RENDER PRINCIPAL
-   ============================================================================ */
 function render(){
   const root=document.getElementById('viewRoot');
   const titleEl=document.getElementById('pageTitle');
@@ -482,9 +351,6 @@ function render(){
   renderTableView(root, actionsEl, currentView);
 }
 
-/* ============================================================================
-   DASHBOARD
-   ============================================================================ */
 function renderDashboard(root){
   const totalKg = db.cosechas.reduce((s,c)=>s+c.cantidadKg,0);
   const totalVentas = db.ventas.filter(v=>v.estado!=='Anulada').reduce((s,v)=>s+v.monto,0);
@@ -538,7 +404,7 @@ function renderDashboard(root){
   </div>
   `;
 
-  // Produccion por cultivo
+  
   const prodCultivo = db.cultivos.map(c=>{
     const kg = db.siembras.filter(s=>s.idCultivo===c.id).reduce((sum,s)=>{
       const co = db.cosechas.find(x=>x.idSiembra===s.id);
@@ -554,7 +420,7 @@ function renderDashboard(root){
       <div class="bar-val">${fmt(x.kg)}</div>
     </div>`).join('');
 
-  // Insumos criticos
+  
   const insumosSorted = [...db.insumos].sort((a,b)=> (a.stock/a.stockMin) - (b.stock/b.stockMin)).slice(0,6);
   const maxStock = Math.max(...insumosSorted.map(x=>x.stock),1);
   document.getElementById('barInsumos').innerHTML = insumosSorted.map(x=>{
@@ -566,7 +432,7 @@ function renderDashboard(root){
     </div>`;
   }).join('');
 
-  // Ranking agricultores
+  
   const rankAg = db.agricultores.map(a=>{
     const parcelasIds = db.parcelas.filter(p=>p.idAgricultor===a.id).map(p=>p.id);
     const siembraIds = db.siembras.filter(s=>parcelasIds.includes(s.idParcela)).map(s=>s.id);
@@ -578,7 +444,7 @@ function renderDashboard(root){
     <li><div class="rank-num">${i+1}</div><div class="rank-name">${r.nombre}</div><div class="rank-val">${money(r.ingreso)}</div></li>
   `).join('');
 
-  // Ranking clientes
+  
   const rankCl = db.clientes.map(c=>{
     const total = db.ventas.filter(v=>v.idCliente===c.id && v.estado!=='Anulada').reduce((s,v)=>s+v.monto,0);
     return {nombre:c.nombre, total};
@@ -588,11 +454,8 @@ function renderDashboard(root){
   `).join('');
 }
 
-/* ============================================================================
-   REPORTES
-   ============================================================================ */
 function renderReportes(root){
-  // Produccion por parcela
+  
   const porParcela = db.parcelas.map(p=>{
     const ag = db.agricultores.find(a=>a.id===p.idAgricultor);
     const siembraIds = db.siembras.filter(s=>s.idParcela===p.id).map(s=>s.id);
@@ -600,19 +463,19 @@ function renderReportes(root){
     return {parcela:p.nombre, agricultor: ag?`${ag.nombres} ${ag.apellidos}`:'—', kg};
   }).sort((a,b)=>b.kg-a.kg);
 
-  // Compras por proveedor
+  
   const porProveedor = db.proveedores.map(p=>{
     const compras = db.compras.filter(c=>c.idProveedor===p.id);
     return {proveedor:p.razonSocial, n:compras.length, total: compras.reduce((s,c)=>s+c.monto,0)};
   }).sort((a,b)=>b.total-a.total);
 
-  // Trabajadores por actividades
+  
   const porTrabajador = db.trabajadores.map(t=>{
     const acts = db.actividades.filter(a=>a.idTrabajador===t.id);
     return {trabajador:`${t.nombres} ${t.apellidos}`, n:acts.length, horas: acts.reduce((s,a)=>s+a.horas,0)};
   }).sort((a,b)=>b.n-a.n);
 
-  // Ingresos por campania
+  
   const camp = {};
   db.siembras.forEach(s=>{
     const cos = db.cosechas.find(c=>c.idSiembra===s.id);
@@ -621,7 +484,7 @@ function renderReportes(root){
     camp[s.campania] = (camp[s.campania]||0) + ingreso;
   });
 
-  // Rankings
+  
   const rankCultivos = db.cultivos.map(c=>{
     const kg = db.siembras.filter(s=>s.idCultivo===c.id).reduce((sum,s)=>{
       const co=db.cosechas.find(x=>x.idSiembra===s.id); return sum+(co?co.cantidadKg:0);
@@ -670,9 +533,6 @@ function renderReportes(root){
   `;
 }
 
-/* ============================================================================
-   AUDITORIA
-   ============================================================================ */
 function renderAuditoria(root){
   if(db.auditoria.length===0){
     root.innerHTML = `<div class="table-wrap"><div class="empty-state"><b>Sin movimientos todavía</b>Los cambios que hagas en Compras, Ventas, Cosechas e Insumos quedarán registrados aquí, igual que los triggers de auditoría en SQL Server.</div></div>`;
@@ -682,9 +542,6 @@ function renderAuditoria(root){
     <tbody>${db.auditoria.map(a=>`<tr><td>${a.fecha}</td><td>${a.tabla}</td><td><span class="pill ${a.op==='INSERT'?'ok':a.op==='DELETE'?'bad':'info'}">${a.op}</span></td><td>${a.detalle}</td></tr>`).join('')}</tbody></table></div>`;
 }
 
-/* ============================================================================
-   VISTA GENERICA DE TABLA (CRUD)
-   ============================================================================ */
 const tableConfigs = {
   agricultores:{
     title:'Nuevo agricultor',
@@ -695,8 +552,8 @@ const tableConfigs = {
     fields:[
       {k:'nombres',label:'Nombres',type:'text',req:true},
       {k:'apellidos',label:'Apellidos',type:'text',req:true},
-      {k:'dni',label:'DNI',type:'text',req:true,unique:true},
-      {k:'telefono',label:'Teléfono',type:'text'},
+      {k:'dni',label:'DNI',type:'text',req:true,unique:true,inputMode:'numeric',maxLength:8,pattern:'\\d{8}'},
+      {k:'telefono',label:'Teléfono',type:'text',inputMode:'numeric',maxLength:9,pattern:'\\d{9}'},
       {k:'direccion',label:'Dirección',type:'text'},
     ],
   },
@@ -706,8 +563,8 @@ const tableConfigs = {
     fields:[
       {k:'nombres',label:'Nombres',type:'text',req:true},
       {k:'apellidos',label:'Apellidos',type:'text',req:true},
-      {k:'dni',label:'DNI',type:'text',req:true,unique:true},
-      {k:'telefono',label:'Teléfono',type:'text'},
+      {k:'dni',label:'DNI',type:'text',req:true,unique:true,inputMode:'numeric',maxLength:8,pattern:'\\d{8}'},
+      {k:'telefono',label:'Teléfono',type:'text',inputMode:'numeric',maxLength:9,pattern:'\\d{9}'},
       {k:'cargo',label:'Cargo',type:'select',options:['Jornalero','Capataz','Regador','Fumigador'],req:true},
       {k:'salario',label:'Salario diario (S/)',type:'number',req:true},
       {k:'fechaContrato',label:'Fecha de contratación',type:'date',req:true},
@@ -790,11 +647,15 @@ const tableConfigs = {
       {k:'perdidaKg',label:'Pérdida (kg)',type:'number'},
       {k:'calidad',label:'Calidad',type:'select',options:['Excelente','Buena','Regular','Mala'],req:true},
     ],
-    onSave(rec){
+    onSave(rec, isNew){
       rec.perdidaKg = rec.perdidaKg||0;
       rec.disponibleKg = rec.cantidadKg - rec.perdidaKg;
       const s = db.siembras.find(x=>x.id===rec.idSiembra);
-      if(s) s.estado='Cosechado';
+      if(s){
+        s.estado='Cosechado';
+        addAudit('Siembras','UPDATE', `Siembra #${s.id} marcada como Cosechado`);
+      }
+      addAudit('Cosechas', isNew?'INSERT':'UPDATE', `Cosecha #${rec.id} registrada/actualizada (${rec.cantidadKg} kg)`);
     },
   },
   insumos:{
@@ -821,6 +682,12 @@ const tableConfigs = {
       {k:'cantidad',label:'Cantidad',type:'number',req:true},
       {k:'precio',label:'Precio unitario (S/)',type:'number',req:true},
     ],
+    validate(rec){
+      if(rec.cantidad <= 0){
+        return 'La cantidad debe ser mayor a 0.';
+      }
+      return null;
+    },
     onSave(rec, isNew){
       const det = {idInsumo:rec.idInsumo, cantidad:rec.cantidad, precio:rec.precio};
       delete rec.idInsumo; delete rec.cantidad; delete rec.precio;
@@ -829,6 +696,9 @@ const tableConfigs = {
         db.detalleCompra.push({id:seq.detalleCompra++, idCompra:rec.id, ...det});
         const ins = db.insumos.find(i=>i.id===det.idInsumo);
         if(ins){ ins.stock += det.cantidad; addAudit('Insumos','UPDATE',`Stock actualizado: ${ins.nombre} +${det.cantidad}`); }
+        addAudit('Compras','INSERT', `Compra #${rec.id} creada (factura ${rec.factura})`);
+      } else {
+        addAudit('Compras','UPDATE', `Compra #${rec.id} modificada (factura ${rec.factura})`);
       }
     },
   },
@@ -845,6 +715,9 @@ const tableConfigs = {
       {k:'precio',label:'Precio unitario (S/)',type:'number',req:true},
     ],
     validate(rec){
+      if(rec.cantidadKg <= 0){
+        return 'La cantidad debe ser mayor a 0.';
+      }
       const co = db.cosechas.find(c=>c.id===rec.idCosecha);
       if(co && rec.cantidadKg > co.disponibleKg){
         return `La cosecha #${co.id} solo tiene ${fmt(co.disponibleKg)} kg disponibles.`;
@@ -858,7 +731,13 @@ const tableConfigs = {
       if(isNew){
         db.detalleVenta.push({id:seq.detalleVenta++, idVenta:rec.id, ...det});
         const co = db.cosechas.find(c=>c.id===det.idCosecha);
-        if(co){ co.disponibleKg -= det.cantidadKg; }
+        if(co){
+          co.disponibleKg -= det.cantidadKg;
+          addAudit('Cosechas','UPDATE', `Cosecha #${co.id} disponible ajustado -${det.cantidadKg} kg`);
+        }
+        addAudit('Ventas','INSERT', `Venta #${rec.id} creada (comprobante ${rec.comprobante})`);
+      } else {
+        addAudit('Ventas','UPDATE', `Venta #${rec.id} modificada (comprobante ${rec.comprobante})`);
       }
     },
   },
@@ -956,9 +835,6 @@ function pillClass(val){
   return 'info';
 }
 
-/* ============================================================================
-   FORMULARIOS (modal)
-   ============================================================================ */
 function openForm(key, id){
   editingId = id;
   const cfg = tableConfigs[key];
@@ -972,14 +848,20 @@ function openForm(key, id){
       let opts;
       if(f.ref){
         let list = db[f.ref];
-        if(f.filter) list = list.filter(f.filter);
+        if(f.filter) list = list.filter(item => f.filter(item) || (record && record[f.k] && Number(record[f.k]) === item.id));
         opts = list.map(o=>`<option value="${o.id}" ${String(val)===String(o.id)?'selected':''}>${f.refLabel(o)}</option>`).join('');
       } else {
         opts = f.options.map(o=>`<option ${val===o?'selected':''}>${o}</option>`).join('');
       }
       return `<div class="field"><label>${f.label}${f.req?' *':''}</label><select data-k="${f.k}">${!f.req?'<option value="">—</option>':''}${opts}</select></div>`;
     }
-    return `<div class="field"><label>${f.label}${f.req?' *':''}</label><input data-k="${f.k}" type="${f.type}" step="${f.type==='number'?'0.01':''}" value="${val}" placeholder="${f.placeholder||''}"></div>`;
+    const attrs = [];
+    if(f.type==='number') attrs.push('min="0"', 'step="0.01"');
+    if(f.inputMode) attrs.push(`inputmode="${f.inputMode}"`);
+    if(f.maxLength) attrs.push(`maxlength="${f.maxLength}"`);
+    if(f.pattern) attrs.push(`pattern="${f.pattern}"`);
+    const attrText = attrs.join(' ');
+    return `<div class="field"><label>${f.label}${f.req?' *':''}</label><input data-k="${f.k}" type="${f.type}" value="${val}" placeholder="${f.placeholder||''}" ${attrText}></div>`;
   }).join('');
 
   document.getElementById('overlay').classList.add('show');
@@ -1006,7 +888,25 @@ function saveForm(key){
     alertEl.classList.add('show');
     return;
   }
-  // Unicidad
+  for(const f of cfg.fields){
+    const v = rec[f.k];
+    if(f.k==='dni' && typeof v === 'string' && !/^\d{8}$/.test(v.trim())){
+      alertEl.textContent='El DNI debe tener exactamente 8 dígitos.';
+      alertEl.classList.add('show');
+      return;
+    }
+    if(f.k==='telefono' && typeof v === 'string' && !/^\d{9}$/.test(v.trim())){
+      alertEl.textContent='El teléfono debe tener exactamente 9 dígitos.';
+      alertEl.classList.add('show');
+      return;
+    }
+    if(f.type==='number' && typeof v === 'number' && v < 0){
+      alertEl.textContent='No se permiten valores negativos.';
+      alertEl.classList.add('show');
+      return;
+    }
+  }
+  
   for(const f of cfg.fields){
     if(f.unique){
       const dup = db[key].find(r=>r[f.k]===rec[f.k] && r.id!==editingId);
@@ -1020,20 +920,39 @@ function saveForm(key){
 
   const isNew = !editingId;
   
-  // Generar ID local si es nuevo
+  
   if(isNew){
     rec.id = seq[key] ? seq[key]++ : (db[key].length?Math.max(...db[key].map(r=>r.id))+1:1);
   } else {
     rec.id = editingId;
   }
 
-  // Intentar guardar en backend si está conectado
+  
   (async () => {
     let savedRecord = rec;
     if(apiConnected){
       try {
-        const apiResult = isNew ? await insertRow(key, rec) : await updateRow(key, rec);
+        const payload = {...rec};
+        if (key === 'compras') {
+          delete payload.monto;
+          delete payload.idInsumo;
+          delete payload.cantidad;
+          delete payload.precio;
+        }
+        if (key === 'ventas') {
+          delete payload.monto;
+          delete payload.idCosecha;
+          delete payload.cantidadKg;
+          delete payload.precio;
+        }
+        const apiResult = isNew ? await insertRow(key, payload) : await updateRow(key, payload);
         if(apiResult && apiResult.success){
+          const persistedId = apiResult.id !== undefined && apiResult.id !== null ? Number(apiResult.id) : savedRecord.id;
+          savedRecord.id = persistedId;
+          rec.id = persistedId;
+          if (typeof seq[key] === 'number') {
+            seq[key] = Math.max(seq[key], persistedId + 1);
+          }
           console.log('✓ Guardado en base de datos');
         } else {
           console.warn('⚠ No se pudo guardar en BD, usando caché local');
@@ -1043,7 +962,7 @@ function saveForm(key){
       }
     }
     
-    // Actualizar BD local (siempre)
+    
     if(isNew){
       db[key].push(savedRecord);
     } else {
@@ -1053,6 +972,7 @@ function saveForm(key){
     if(cfg.onSave) cfg.onSave(isNew?savedRecord:db[key].find(r=>r.id===editingId), isNew);
 
     addAudit(key.charAt(0).toUpperCase()+key.slice(1), isNew?'INSERT':'UPDATE', `Registro #${savedRecord.id||editingId} en ${key}`);
+    savePersistedState();
     closeModal();
     buildNav();
     render();
@@ -1063,7 +983,7 @@ function saveForm(key){
 function removeRow(key, id){
   if(!confirm('¿Eliminar este registro? Esta acción no se puede deshacer.')) return;
   
-  // Intentar eliminar del backend si está conectado
+  
   (async () => {
     if(apiConnected){
       try {
@@ -1078,24 +998,22 @@ function removeRow(key, id){
       }
     }
     
-    // Eliminar de BD local (siempre)
+    
     db[key] = db[key].filter(r=>r.id!==id);
     addAudit(key.charAt(0).toUpperCase()+key.slice(1), 'DELETE', `Registro #${id} eliminado de ${key}`);
+    savePersistedState();
     buildNav();
     render();
     toast('Registro eliminado');
   })();
 }
 
-/* ============================================================================
-   INIT
-   ============================================================================ */
 (async () => {
   console.log('Iniciando aplicación...');
   await checkApiConnection();
   if(apiConnected){
     toast('✓ Conectado a base de datos');
-    // Sincronizar tablas principales desde BD
+    
     await Promise.all([
       syncTableFromDB('agricultores'),
       syncTableFromDB('trabajadores'),

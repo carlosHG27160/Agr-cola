@@ -7,10 +7,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-/* ----------------------------------------------------------------------------
-   Lista blanca de procedimientos que la API puede ejecutar.
-   Cualquier nombre que no esté aquí se rechaza (evita ejecutar SQL arbitrario).
-   ---------------------------------------------------------------------------- */
 const ALLOWED_PROCEDURES = new Set([
   'sp_ListarAgricultores', 'sp_ListarTrabajadores', 'sp_ListarParcelas', 'sp_ListarCultivos',
   'sp_ListarSiembras', 'sp_ListarCosechas', 'sp_ListarInsumos', 'sp_ListarCompras',
@@ -28,10 +24,9 @@ const ALLOWED_PROCEDURES = new Set([
   'sp_EliminarAgricultor', 'sp_EliminarTrabajador', 'sp_EliminarParcela', 'sp_EliminarCultivo',
   'sp_EliminarSiembra', 'sp_EliminarCosecha', 'sp_EliminarInsumo', 'sp_EliminarCompra',
   'sp_EliminarVenta', 'sp_EliminarCliente', 'sp_EliminarProveedor',
+  'sp_InsertarAuditoria',
 ]);
 
-// Al insertar un registro nuevo, sga.js manda también un "id" generado en el
-// navegador (para su caché local). Como IdX es IDENTITY, no se lo pasamos al proc.
 function limpiarParametros(procName, body) {
   const params = { ...body };
   if (procName.startsWith('sp_Insertar')) delete params.id;
@@ -48,7 +43,6 @@ async function ejecutarProcedimiento(procName, params) {
   return request.execute(procName);
 }
 
-/* --------------------------------- HEALTH ---------------------------------- */
 app.get('/api/health', async (req, res) => {
   try {
     await getPool();
@@ -58,7 +52,6 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
-/* ---------------------------- LISTAR (GET) --------------------------------- */
 app.get('/api/procedures/:procName', async (req, res) => {
   const { procName } = req.params;
   if (!ALLOWED_PROCEDURES.has(procName)) {
@@ -73,7 +66,6 @@ app.get('/api/procedures/:procName', async (req, res) => {
   }
 });
 
-/* ----------------------- INSERTAR / ACTUALIZAR / ELIMINAR (POST) ----------- */
 app.post('/api/procedures/:procName', async (req, res) => {
   const { procName } = req.params;
   if (!ALLOWED_PROCEDURES.has(procName)) {
